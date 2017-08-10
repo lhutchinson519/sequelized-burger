@@ -14,7 +14,6 @@ module.exports = function(app) {
         burger.burgers.create({
             burger_name: req.body.burger_name,
             devoured: req.body.devoured
-            // date: 
         }).then(function(result) {
             res.json(result);
         });
@@ -32,7 +31,6 @@ module.exports = function(app) {
         }).then(function(result) {
             // render back to index with handle
             res.json(result);
-            res.redirect("/");
         });
     });
     return app;
