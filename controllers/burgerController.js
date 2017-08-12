@@ -2,6 +2,11 @@ var burger = require("../models");
 
 module.exports = function(app) {
 
+
+    app.get("/", function(req, res) {
+        res.redirect("/burgers");
+    });
+
     app.get("/burgers", function(req, res) {
         burger.burgers.findAll({}).then(function(burgerData) {
             res.render("index", { burger_data: burgerData });
@@ -15,22 +20,25 @@ module.exports = function(app) {
             burger_name: req.body.burger_name,
             devoured: req.body.devoured
         }).then(function(result) {
-            res.json(result);
+            res.redirect("/burgers");
+
         });
     });
 
     // put route -> back to index
     app.put("/burgers/update", function(req, res) {
+
+        console.log(req.body)
         burger.burgers.update({
             burger_name: req.body.burger_id,
-            devoured: req.body.devoured
+            devoured: 0
         }, {
             where: {
-                id: req.body.id
+                id: req.body.burger_id
             }
         }).then(function(result) {
             // render back to index with handle
-            res.json(result);
+            res.redirect("/");
         });
     });
     return app;
