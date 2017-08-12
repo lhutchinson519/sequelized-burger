@@ -30,8 +30,7 @@ module.exports = function(app) {
 
         console.log(req.body)
         burger.burgers.update({
-            burger_name: req.body.burger_id,
-            devoured: 0
+            devoured: 1
         }, {
             where: {
                 id: req.body.burger_id
